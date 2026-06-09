@@ -1,0 +1,69 @@
+<resources>
+    <string name="app_name">EcoSort</string>
+    <string name="organic">Sisa Organik</string>
+    <string name="recycle">Kitar Semula</string>
+    <string name="hazardous">Sisa Berbahaya</string>
+    <string name="easy">🌱 Mudah</string>
+    <string name="medium">⚡ Sederhana</string>
+    <string name="hard">🔥 Sukar</string>
+    <string name="survival">♾️ Tanpa Had</string>
+    <string name="score_label">Skor: %d</string>
+    <string name="best_label">Terbaik: %d</string>
+    <string name="play_again">▶ Main Semula</string>
+    <string name="main_menu">🏠 Menu Utama</string>
+    <string name="share_score">Kongsi Skor</string>
+    <string name="library">Perpustakaan</string>
+    <string name="home">Utama</string>
+    <string name="intro">Pengenalan</string>
+    <string name="choose_difficulty">Pilih tahap kesukaran anda</string>
+    <string name="how_to_play">Cara Bermain</string>
+    <string name="drag_waste">Klasifikasi sisa yang jatuh ke dalam tong yang betul sebelum ia mencecah tanah!</string>
+    <string name="organic_desc">Sisa makanan, tumbuhan, kulit buah</string>
+    <string name="recycle_desc">Botol, kertas, tin, plastik</string>
+    <string name="hazardous_desc">Bateri, bahan kimia, e-sisa</string>
+    <string name="start_game">MULA BERMAIN</string>
+    <string name="eco_champion">Juara Eko!</string>
+    <string name="malaysia_proud">Malaysia bangga dengan anda! 🇲🇾</string>
+    <string name="good_effort">Usaha yang Baik!</string>
+    <string name="keep_sorting">Teruskan mengasingkan — setiap item sangat bermakna.</string>
+    <string name="keep_practising">Teruskan Berlatih</string>
+    <string name="pollution_rising">Pencemaran sedang meningkat — cuba lagi!</string>
+    <string name="correct_stat">BETUL</string>
+    <string name="wrong_stat">SALAH</string>
+    <string name="score_stat">SKOR</string>
+    <string name="eco_tip_label">🌱 TIP EKO</string>
+    <string name="items_round_label">📦 ITEM DALAM PUSINGAN INI</string>
+    <string name="new_record">✨ REKOD BAHARU! ✨</string>
+    <string name="multiplier_msg">Gandaan %dx! (Rentetan: %d)</string>
+    <string name="streak_msg">Rentetan: %d</string>
+    <string name="magnet_active">🧲 Magnet Aktif: %d</string>
+    <string name="freeze_active">❄️ Pembekuan Aktif!</string>
+    <string name="library_title">Perpustakaan Sisa</string>
+    <string name="library_subtitle">Asingkan item dalam permainan untuk membuka rahsianya!</string>
+    <string name="back_to_menu">Kembali ke Menu</string>
+    <string name="locked_item_msg">Terkunci! Asingkan item ini dengan betul dalam permainan untuk membukanya.</string>
+    <string name="cool_btn">Mantap!</string>
+    <string name="intro_title">Kitar Semula di Malaysia</string>
+    <string name="intro_subtitle">EcoSort membantu anda belajar cara mengasingkan sisa mengikut piawaian kitar semula Malaysia. Pengasingan sisa yang betul mengurangkan pencemaran tapak pelupusan dan melindungi alam sekitar kita.</string>
+    <string name="organic_waste">Sisa Organik</string>
+    <string name="recyclables">Bahan Kitar Semula</string>
+    <string name="hazardous_waste">Sisa Berbahaya</string>
+    <string name="organic_examples">Sisa makanan, kulit pisang, sisa sayur-sayuran, daun kering.</string>
+    <string name="organic_instruction">Item ini mereput secara semula jadi. Di Malaysia, ia boleh dijadikan kompos untuk menghasilkan baja taman.</string>
+    <string name="recycle_examples">Botol plastik, tin aluminium, kertas, kadbod, balang kaca.</string>
+    <string name="recycle_instruction">Pastikan ia bersih dan kering. Masukkan ke dalam tong kitar semula atau bawa ke pusat kitar semula.</string>
+    <string name="hazardous_examples">Bateri,mentol lampu, e-sisa (telefon lama, kabel), bahan kimia.</string>
+    <string name="hazardous_instruction">Ini mengandungi bahan toksik. JANGAN sesekali masukkan ke dalam tong biasa. Cari pusat pengumpulan e-sisa di pusat beli-belah atau pusat SWCorp.</string>
+    <string name="share_message">Saya baru sahaja mendapat skor %d dalam EcoSort dan menjadi Juara Eco! Bolehkah anda mengalahkan saya? 🌍♻️</string>
+    <string name="share_chooser_title">Kongsi Skor melalui</string>
+
+    <string-array name="eco_tips">
+        <item>💡 Bateri mengandungi plumbum dan merkuri — sentiasa hantar ke tong sisa berbahaya.</item>
+        <item>💡 Kulit pisang mereput secara semula jadi — ia adalah sisa organik.</item>
+        <item>💡 Botol plastik boleh dikitar semula menjadi fabrik baru!</item>
+        <item>💡 SWCorp Malaysia menyediakan pengumpulan e-sisa berjadual — semak laman web mereka.</item>
+        <item>💡 Kulit telur adalah bahan kompos organik yang hebat.</item>
+        <item>💡 Kadbod mestilah kering untuk dikitar semula dengan betul.</item>
+        <item>💡 Mentol CFL mengandungi raksa — anggap ia sebagai sisa berbahaya.</item>
+    </string-array>
+</resources>

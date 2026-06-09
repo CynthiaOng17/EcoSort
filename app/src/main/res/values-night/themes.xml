@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="Theme.EcoSort" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">#3DD68C</item>
+        <item name="colorPrimaryVariant">#0D2D0F</item>
+        <item name="colorOnPrimary">#0D2D0F</item>
+        <item name="colorSecondary">#2ABF7A</item>
+        <item name="colorSecondaryVariant">#1A9E62</item>
+        <item name="colorOnSecondary">#0D2D0F</item>
+        <item name="android:statusBarColor">#0D2D0F</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+        <item name="android:windowBackground">#0D2D0F</item>
+    </style>
+
+    <style name="Theme.EcoSort.Splash" parent="Theme.EcoSort">
+        <item name="android:windowBackground">#0D2D0F</item>
+    </style>
+
+</resources>

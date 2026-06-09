@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Hazardous Waste card: dark brownish-orange, matching the screenshot -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="#4D2E1A" />
+    <corners android:radius="12dp" />
+</shape>

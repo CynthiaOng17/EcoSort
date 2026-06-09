@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Easy button background — matches the screenshot:
+    solid warm cream/beige fill with no stroke (selected/primary style).
+    Place in: res/drawable/bg_btn_easy.xml
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="#EEE8D5" />
+    <corners android:radius="16dp" />
+</shape>

@@ -1,0 +1,69 @@
+<resources>
+    <string name="app_name">EcoSort</string>
+    <string name="organic">Organic</string>
+    <string name="recycle">Recycle</string>
+    <string name="hazardous">Hazardous</string>
+    <string name="easy">🌱 Easy</string>
+    <string name="medium">⚡ Medium</string>
+    <string name="hard">🔥 Hard</string>
+    <string name="survival">♾️ Survival</string>
+    <string name="score_label">Score: %d</string>
+    <string name="best_label">Best: %d</string>
+    <string name="play_again">▶ Play Again</string>
+    <string name="main_menu">🏠 Main Menu</string>
+    <string name="share_score">📤 Share Score</string>
+    <string name="library">Library</string>
+    <string name="home">Home</string>
+    <string name="intro">Intro</string>
+    <string name="choose_difficulty">Choose your difficulty</string>
+    <string name="how_to_play">How to Play</string>
+    <string name="drag_waste">Drag falling waste into the correct bin before it hits the ground!</string>
+    <string name="organic_desc">Food scraps, plants, fruit peels</string>
+    <string name="recycle_desc">Bottles, paper, cans, plastic</string>
+    <string name="hazardous_desc">Batteries, chemicals, e-waste</string>
+    <string name="start_game">START GAME</string>
+    <string name="eco_champion">Eco Champion!</string>
+    <string name="malaysia_proud">Malaysia is proud of you! 🇲🇾</string>
+    <string name="good_effort">Good Effort!</string>
+    <string name="keep_sorting">Keep sorting — every item counts.</string>
+    <string name="keep_practising">Keep Practising</string>
+    <string name="pollution_rising">Pollution is rising — try again!</string>
+    <string name="correct_stat">CORRECT</string>
+    <string name="wrong_stat">WRONG</string>
+    <string name="score_stat">SCORE</string>
+    <string name="eco_tip_label">🌱 ECO TIP</string>
+    <string name="items_round_label">📦 ITEMS IN THIS ROUND</string>
+    <string name="new_record">✨ NEW RECORD! ✨</string>
+    <string name="multiplier_msg">%dx Multiplier! (Streak: %d)</string>
+    <string name="streak_msg">Streak: %d</string>
+    <string name="magnet_active">🧲 Magnet Active: %d</string>
+    <string name="freeze_active">❄️ Freeze Active!</string>
+    <string name="library_title">Waste Library</string>
+    <string name="library_subtitle">Sort items in game to unlock their secrets!</string>
+    <string name="back_to_menu">Back to Menu</string>
+    <string name="locked_item_msg">Locked! Sort this item correctly in a game to unlock.</string>
+    <string name="cool_btn">Cool!</string>
+    <string name="intro_title">Recycling in Malaysia</string>
+    <string name="intro_subtitle">EcoSort helps you learn how to separate waste according to Malaysian recycling standards. Proper waste separation reduces landfill pollution and protects our environment.</string>
+    <string name="organic_waste">Organic Waste</string>
+    <string name="recyclables">Recyclables</string>
+    <string name="hazardous_waste">Hazardous Waste</string>
+    <string name="organic_examples">Food scraps, banana peels, vegetable waste, dry leaves.</string>
+    <string name="organic_instruction">These items decompose naturally. In Malaysia, they can be composted to create fertilizer for gardens.</string>
+    <string name="recycle_examples">Plastic bottles, aluminum cans, paper, cardboard, glass jars.</string>
+    <string name="recycle_instruction">Ensure they are clean and dry. Place them in recycling bins or bring them to a recycling centre.</string>
+    <string name="hazardous_examples">Batteries, light bulbs, e-waste (old phones, cables), chemicals.</string>
+    <string name="hazardous_instruction">These contain toxic materials. NEVER put in normal bins. Find e-waste collection points at malls or SWCorp centres.</string>
+    <string name="share_message">I just scored %d in EcoSort and became an Eco Champion! Can you beat me? 🌍♻️</string>
+    <string name="share_chooser_title">Share Score via</string>
+
+    <string-array name="eco_tips">
+        <item>💡 Batteries contain lead and mercury — always send them to hazardous bins.</item>
+        <item>💡 Banana peels decompose naturally — they\'re organic waste.</item>
+        <item>💡 Plastic bottles can be recycled into new fabric!</item>
+        <item>💡 Malaysia\'s SWCorp provides scheduled e-waste collection — check their site.</item>
+        <item>💡 Egg shells are great organic compost material.</item>
+        <item>💡 Cardboard must be dry to be properly recycled.</item>
+        <item>💡 CFL bulbs contain mercury — treat them as hazardous waste.</item>
+    </string-array>
+</resources>
