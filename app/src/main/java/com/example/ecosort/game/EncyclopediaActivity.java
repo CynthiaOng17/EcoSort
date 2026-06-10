@@ -46,8 +46,8 @@ public class EncyclopediaActivity extends AppCompatActivity {
                 view.setOnClickListener(v -> {
                     if (discovered) {
                         new AlertDialog.Builder(EncyclopediaActivity.this)
-                            .setTitle(item.emoji + " " + item.name)
-                            .setMessage(item.fact)
+                            .setTitle(item.emoji + " " + item.getLocalizedName(EncyclopediaActivity.this))
+                            .setMessage(item.getLocalizedFact(EncyclopediaActivity.this))
                             .setPositiveButton(R.string.cool_btn, null)
                             .show();
                     } else {

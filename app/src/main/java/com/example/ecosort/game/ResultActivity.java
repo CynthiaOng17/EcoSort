@@ -1,14 +1,23 @@
 package com.example.ecosort.game;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 
 import com.example.ecosort.R;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -77,7 +86,12 @@ public class ResultActivity extends AppCompatActivity {
                             : 0xFFFF9800; // Bright Vivid Orange
                 }
 
-                tv.setText(item.emoji + " " + item.name + " → " + categoryStr + (item.isCorrectlySorted ? "" : " ❌"));
+                String itemText = item.emoji + " " + item.getLocalizedName(this);
+                if (!item.isCorrectlySorted) {
+                    tv.setText(itemText + " → " + getString(R.string.correct_answer_label, categoryStr));
+                } else {
+                    tv.setText(itemText + " → " + categoryStr);
+                }
                 tv.setTextColor(color);
                 tv.setTextSize(18);
                 tv.setPadding(0, 4, 0, 4);
@@ -117,11 +131,20 @@ public class ResultActivity extends AppCompatActivity {
         Button btnShare     = findViewById(R.id.btn_share);
 
         btnShare.setOnClickListener(v -> {
-            String message = getString(R.string.share_message, score);
-            Intent shareIntent = new Intent(Intent.ACTION_SEND);
-            shareIntent.setType("text/plain");
-            shareIntent.putExtra(Intent.EXTRA_TEXT, message);
-            startActivity(Intent.createChooser(shareIntent, getString(R.string.share_chooser_title)));
+            Bitmap bitmap = captureView(findViewById(android.R.id.content));
+            Uri uri = saveBitmapToCache(bitmap);
+            
+            if (uri != null) {
+                String message = getString(R.string.share_message, score);
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.setType("image/png");
+                shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
+                shareIntent.putExtra(Intent.EXTRA_TEXT, message);
+                shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                startActivity(Intent.createChooser(shareIntent, getString(R.string.share_chooser_title)));
+            } else {
+                Toast.makeText(this, "Failed to create share image", Toast.LENGTH_SHORT).show();
+            }
         });
 
         btnPlayAgain.setOnClickListener(v -> {
@@ -146,5 +169,27 @@ public class ResultActivity extends AppCompatActivity {
         android.content.res.Configuration config = new android.content.res.Configuration();
         config.setLocale(locale);
         getResources().updateConfiguration(config, getResources().getDisplayMetrics());
+    }
+
+    private Bitmap captureView(View view) {
+        Bitmap bitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        view.draw(canvas);
+        return bitmap;
+    }
+
+    private Uri saveBitmapToCache(Bitmap bitmap) {
+        try {
+            File cachePath = new File(getCacheDir(), "images");
+            cachePath.mkdirs();
+            File file = new File(cachePath, "score_share.png");
+            FileOutputStream stream = new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            stream.close();
+            return FileProvider.getUriForFile(this, getPackageName() + ".fileprovider", file);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

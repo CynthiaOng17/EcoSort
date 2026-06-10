@@ -3,6 +3,9 @@
     <string name="organic">Sisa Organik</string>
     <string name="recycle">Kitar Semula</string>
     <string name="hazardous">Sisa Berbahaya</string>
+    <string name="organic_with_emoji">🟣  Sisa Organik</string>
+    <string name="recycle_with_emoji">♻️  Kitar Semula</string>
+    <string name="hazardous_with_emoji">☣️  Sisa Berbahaya</string>
     <string name="easy">🌱 Mudah</string>
     <string name="medium">⚡ Sederhana</string>
     <string name="hard">🔥 Sukar</string>
@@ -56,6 +59,7 @@
     <string name="hazardous_instruction">Ini mengandungi bahan toksik. JANGAN sesekali masukkan ke dalam tong biasa. Cari pusat pengumpulan e-sisa di pusat beli-belah atau pusat SWCorp.</string>
     <string name="share_message">Saya baru sahaja mendapat skor %d dalam EcoSort dan menjadi Juara Eco! Bolehkah anda mengalahkan saya? 🌍♻️</string>
     <string name="share_chooser_title">Kongsi Skor melalui</string>
+    <string name="correct_answer_label">Jawapan Betul: %s ✅</string>
 
     <string-array name="eco_tips">
         <item>💡 Bateri mengandungi plumbum dan merkuri — sentiasa hantar ke tong sisa berbahaya.</item>

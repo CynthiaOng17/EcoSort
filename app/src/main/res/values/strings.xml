@@ -3,6 +3,9 @@
     <string name="organic">Organic</string>
     <string name="recycle">Recycle</string>
     <string name="hazardous">Hazardous</string>
+    <string name="organic_with_emoji">🟣  Organic</string>
+    <string name="recycle_with_emoji">♻️  Recycle</string>
+    <string name="hazardous_with_emoji">☣️  Hazardous</string>
     <string name="easy">🌱 Easy</string>
     <string name="medium">⚡ Medium</string>
     <string name="hard">🔥 Hard</string>
@@ -56,6 +59,7 @@
     <string name="hazardous_instruction">These contain toxic materials. NEVER put in normal bins. Find e-waste collection points at malls or SWCorp centres.</string>
     <string name="share_message">I just scored %d in EcoSort and became an Eco Champion! Can you beat me? 🌍♻️</string>
     <string name="share_chooser_title">Share Score via</string>
+    <string name="correct_answer_label">Correct: %s ✅</string>
 
     <string-array name="eco_tips">
         <item>💡 Batteries contain lead and mercury — always send them to hazardous bins.</item>
