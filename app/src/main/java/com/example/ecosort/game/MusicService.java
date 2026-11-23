@@ -10,8 +10,19 @@ import com.example.ecosort.R;
 public class MusicService extends Service {
     public static final String ACTION_TOGGLE_MUTE = "com.example.ecosort.TOGGLE_MUTE";
     public static final String EXTRA_MUTE_STATE = "mute_state";
-    
+
+    private static MusicService instance;
+
     private MediaPlayer mediaPlayer;
+
+    /** Pauses the music if the service is running. Called when the app goes to the background. */
+    public static void pauseMusic() {
+        if (instance != null && instance.mediaPlayer != null) {
+            try {
+                if (instance.mediaPlayer.isPlaying()) instance.mediaPlayer.pause();
+            } catch (IllegalStateException ignored) {}
+        }
+    }
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -21,11 +32,12 @@ public class MusicService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+        instance = this;
         try {
             mediaPlayer = MediaPlayer.create(this, R.raw.bg_music);
             if (mediaPlayer != null) {
                 mediaPlayer.setLooping(true);
-                
+
                 // Read saved mute state from preferences
                 boolean isMuted = getSharedPreferences("EcoSort", Context.MODE_PRIVATE)
                         .getBoolean("muted", false);
@@ -46,7 +58,8 @@ public class MusicService extends Service {
                 mediaPlayer.setVolume(vol, vol);
             }
         }
-        
+
+        // Also acts as "resume" when the app returns to the foreground
         if (mediaPlayer != null && !mediaPlayer.isPlaying()) {
             mediaPlayer.start();
         }
@@ -56,6 +69,7 @@ public class MusicService extends Service {
 
     @Override
     public void onDestroy() {
+        if (instance == this) instance = null;
         if (mediaPlayer != null) {
             mediaPlayer.stop();
             mediaPlayer.release();

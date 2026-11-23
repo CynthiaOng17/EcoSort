@@ -1,9 +1,7 @@
 package com.example.ecosort.game;
 
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,6 +19,7 @@ public class MenuActivity extends AppCompatActivity {
     public static final int SURVIVAL = 3;
 
     private boolean isMuted = false;
+    private BottomNavigationView bottomNav;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +45,7 @@ public class MenuActivity extends AppCompatActivity {
         findViewById(R.id.btn_lang).setOnClickListener(v -> toggleLanguage());
 
         // Bottom Navigation
-        BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
+        bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
             if (id == R.id.nav_home) {
@@ -78,6 +77,8 @@ public class MenuActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         displayHighScore();
+        // Re-highlight "Home" when returning from Library / Intro
+        bottomNav.getMenu().findItem(R.id.nav_home).setChecked(true);
     }
 
     private void displayHighScore() {

@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
+        android:name=".game.EcoSortApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -14,7 +15,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EcoSort">
 
-        <!-- No special theme on SplashActivity — let the layout render normally -->
         <activity
             android:name=".game.SplashActivity"
             android:exported="true"
@@ -29,7 +29,7 @@
             android:exported="false"/>
 
         <activity android:name=".game.GameActivity"
-            android:configChanges="orientation|screenSize|screenLayout"
+            android:screenOrientation="portrait"
             android:exported="false"/>
 
         <activity android:name=".game.ResultActivity"

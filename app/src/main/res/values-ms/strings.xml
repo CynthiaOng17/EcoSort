@@ -3,9 +3,6 @@
     <string name="organic">Sisa Organik</string>
     <string name="recycle">Kitar Semula</string>
     <string name="hazardous">Sisa Berbahaya</string>
-    <string name="organic_with_emoji">🟣  Sisa Organik</string>
-    <string name="recycle_with_emoji">♻️  Kitar Semula</string>
-    <string name="hazardous_with_emoji">☣️  Sisa Berbahaya</string>
     <string name="easy">🌱 Mudah</string>
     <string name="medium">⚡ Sederhana</string>
     <string name="hard">🔥 Sukar</string>

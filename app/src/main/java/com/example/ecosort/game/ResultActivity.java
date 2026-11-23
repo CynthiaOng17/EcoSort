@@ -88,9 +88,10 @@ public class ResultActivity extends AppCompatActivity {
 
                 String itemText = item.emoji + " " + item.getLocalizedName(this);
                 if (!item.isCorrectlySorted) {
-                    tv.setText(itemText + " → " + getString(R.string.correct_answer_label, categoryStr));
+                    String correctMsg = getString(R.string.correct_answer_label, categoryStr);
+                    tv.setText(String.format("%s → %s", itemText, correctMsg));
                 } else {
-                    tv.setText(itemText + " → " + categoryStr);
+                    tv.setText(String.format("%s → %s", itemText, categoryStr));
                 }
                 tv.setTextColor(color);
                 tv.setTextSize(18);
@@ -162,6 +163,7 @@ public class ResultActivity extends AppCompatActivity {
         });
     }
 
+    @SuppressWarnings("deprecation")
     private void loadLocale() {
         String lang = getSharedPreferences("EcoSort", MODE_PRIVATE).getString("lang", "en");
         java.util.Locale locale = new java.util.Locale(lang);
@@ -181,14 +183,16 @@ public class ResultActivity extends AppCompatActivity {
     private Uri saveBitmapToCache(Bitmap bitmap) {
         try {
             File cachePath = new File(getCacheDir(), "images");
-            cachePath.mkdirs();
+            if (!cachePath.exists() && !cachePath.mkdirs()) {
+                android.util.Log.e("ResultActivity", "Failed to create cache directory");
+            }
             File file = new File(cachePath, "score_share.png");
             FileOutputStream stream = new FileOutputStream(file);
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
             stream.close();
             return FileProvider.getUriForFile(this, getPackageName() + ".fileprovider", file);
         } catch (IOException e) {
-            e.printStackTrace();
+            android.util.Log.e("ResultActivity", "Error saving bitmap to cache", e);
             return null;
         }
     }

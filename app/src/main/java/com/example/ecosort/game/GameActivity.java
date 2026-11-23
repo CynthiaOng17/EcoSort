@@ -21,8 +21,6 @@ public class GameActivity extends AppCompatActivity {
 
     // ── Game config ────────────────────────────────────────────────────────────
     private static final int MAX_LIVES    = 3;
-    private static final int POINTS_RIGHT = 10;
-    private static final int POINTS_WRONG = -5;
 
     // Fall animation durations per difficulty (ms)
     private static final int[] FALL_DURATIONS = {1800, 1100, 700, 1500};
@@ -87,7 +85,7 @@ public class GameActivity extends AppCompatActivity {
                 : 200;
 
         buildItemList();
-        
+
         // Hide game item until start button is pressed
         tvFallingItem.setVisibility(View.INVISIBLE);
     }
@@ -146,16 +144,24 @@ public class GameActivity extends AppCompatActivity {
 
         List<WasteItem> pool = new ArrayList<>(Arrays.asList(WasteItem.ALL));
         Collections.shuffle(pool);
-        
+
         if (difficulty == MenuActivity.SURVIVAL) {
-            gameItems = new ArrayList<>();
-            for (int i = 0; i < 5; i++) {
-                Collections.shuffle(pool);
-                gameItems.addAll(new ArrayList<>(pool));
-            }
+            // Start with one shuffled pass; more are appended as needed (see refillSurvivalItems)
+            gameItems = new ArrayList<>(pool);
         } else {
-            gameItems = pool.subList(0, Math.min(totalItems, pool.size()));
+            gameItems = new ArrayList<>(pool.subList(0, Math.min(totalItems, pool.size())));
         }
+    }
+
+    /** Survival mode: append another shuffled pass of every item so the game never runs out. */
+    private void refillSurvivalItems() {
+        List<WasteItem> next = new ArrayList<>(Arrays.asList(WasteItem.ALL));
+        Collections.shuffle(next);
+        // Avoid showing the same item twice in a row at the seam between passes
+        if (!gameItems.isEmpty() && next.get(0) == gameItems.get(gameItems.size() - 1)) {
+            Collections.swap(next, 0, next.size() - 1);
+        }
+        gameItems.addAll(next);
     }
 
     // ── Timer ──────────────────────────────────────────────────────────────────
@@ -172,6 +178,10 @@ public class GameActivity extends AppCompatActivity {
 
     // ── Item falling ───────────────────────────────────────────────────────────
     private void showNextItem() {
+        if (difficulty == MenuActivity.SURVIVAL && currentIndex >= gameItems.size()) {
+            refillSurvivalItems();
+        }
+
         if (currentIndex >= gameItems.size()) {
             endGame();
             return;
@@ -194,10 +204,10 @@ public class GameActivity extends AppCompatActivity {
         String[] powers = {"❤️", "❄️", "✨"};
         int rand = (int)(Math.random() * powers.length);
         String power = powers[rand];
-        
+
         tvFallingItem.setText(power);
         tvFallingItem.setTag(power); // Mark as power-up
-        
+
         startFallingAnimation();
     }
 
@@ -230,7 +240,7 @@ public class GameActivity extends AppCompatActivity {
                     }
                 }
             });
-            
+
             if (isMagnetActive && tvFallingItem.getTag() == null) {
                 magnetUsesLeft--;
                 if (magnetUsesLeft <= 0) isMagnetActive = false;
@@ -268,6 +278,17 @@ public class GameActivity extends AppCompatActivity {
                     showNextItem();
                 } else {
                     checkDrop(v, event.getRawX(), event.getRawY());
+                }
+                return true;
+
+            case MotionEvent.ACTION_CANCEL:
+                // Touch interrupted (e.g. system gesture) — don't leave the game stuck
+                if (v.getTag() == null) {
+                    resumeFall(v);
+                } else {
+                    applyPowerUp((String) v.getTag());
+                    v.setVisibility(View.INVISIBLE);
+                    showNextItem();
                 }
                 return true;
         }
@@ -327,7 +348,13 @@ public class GameActivity extends AppCompatActivity {
         fallAnimator.setDuration(finalRemaining);
         fallAnimator.addListener(new android.animation.AnimatorListenerAdapter() {
             @Override public void onAnimationEnd(android.animation.Animator a) {
-                handleSort(-1);
+                if (v.getTag() != null) {
+                    // A power-up that was dragged then dropped/cancelled and fell off — skip it
+                    v.setVisibility(View.INVISIBLE);
+                    showNextItem();
+                } else {
+                    handleSort(-1);
+                }
             }
         });
         fallAnimator.start();
@@ -347,10 +374,10 @@ public class GameActivity extends AppCompatActivity {
             score += (pointsPerCorrect * multiplier);
             correctCount++;
             flashBin(binCategory);
-            
+
             getSharedPreferences("EcoSort_Library", MODE_PRIVATE)
-                .edit().putBoolean(currentItem.name, true).apply();
-                
+                    .edit().putBoolean(currentItem.name, true).apply();
+
             if (difficulty == MenuActivity.SURVIVAL && correctCount % 10 == 0) {
                 fallDuration = Math.max(400, fallDuration - 100);
             }
@@ -396,7 +423,7 @@ public class GameActivity extends AppCompatActivity {
         StringBuilder hearts = new StringBuilder();
         for (int i = 0; i < MAX_LIVES; i++) hearts.append(i < lives ? "❤️" : "🖤");
         tvLives.setText(hearts);
-        
+
         if (isMagnetActive) tvStreak.append("\n" + getString(R.string.magnet_active, magnetUsesLeft));
         if (isFreezeActive) tvStreak.append("\n" + getString(R.string.freeze_active));
     }
@@ -423,15 +450,23 @@ public class GameActivity extends AppCompatActivity {
         if (gameTimer != null) gameTimer.cancel();
         String[] tips = getEcoTips();
         String tip = tips[(int)(Math.random() * tips.length)];
-        Intent intent = new Intent(this, ResultActivity.class);
-        intent.putExtra(ResultActivity.EXTRA_SCORE,    score);
-        intent.putExtra(ResultActivity.EXTRA_CORRECT,  correctCount);
-        intent.putExtra(ResultActivity.EXTRA_WRONG,    wrongCount);
-        intent.putExtra(ResultActivity.EXTRA_TIP,      tip);
-        intent.putExtra(ResultActivity.EXTRA_ITEMS,    new ArrayList<>(gameItems));
-        intent.putExtra(MenuActivity.EXTRA_DIFFICULTY, difficulty);
-        startActivity(intent);
-        finish();
+
+        // Only send the items the player actually saw (not the unplayed remainder)
+        final ArrayList<WasteItem> playedItems =
+                new ArrayList<>(gameItems.subList(0, Math.min(currentIndex, gameItems.size())));
+
+        // Short delay so player sees the last heart turn black before switching
+        tvFallingItem.postDelayed(() -> {
+            Intent intent = new Intent(this, ResultActivity.class);
+            intent.putExtra(ResultActivity.EXTRA_SCORE,    score);
+            intent.putExtra(ResultActivity.EXTRA_CORRECT,  correctCount);
+            intent.putExtra(ResultActivity.EXTRA_WRONG,    wrongCount);
+            intent.putExtra(ResultActivity.EXTRA_TIP,      tip);
+            intent.putExtra(ResultActivity.EXTRA_ITEMS,    playedItems);
+            intent.putExtra(MenuActivity.EXTRA_DIFFICULTY, difficulty);
+            startActivity(intent);
+            finish();
+        }, 500);
     }
 
     private void updateMuteButton(TextView btn) {

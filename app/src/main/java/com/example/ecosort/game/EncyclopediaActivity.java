@@ -46,10 +46,10 @@ public class EncyclopediaActivity extends AppCompatActivity {
                 view.setOnClickListener(v -> {
                     if (discovered) {
                         new AlertDialog.Builder(EncyclopediaActivity.this)
-                            .setTitle(item.emoji + " " + item.getLocalizedName(EncyclopediaActivity.this))
-                            .setMessage(item.getLocalizedFact(EncyclopediaActivity.this))
-                            .setPositiveButton(R.string.cool_btn, null)
-                            .show();
+                                .setTitle(item.emoji + " " + item.getLocalizedName(EncyclopediaActivity.this))
+                                .setMessage(item.getLocalizedFact(EncyclopediaActivity.this))
+                                .setPositiveButton(R.string.cool_btn, null)
+                                .show();
                     } else {
                         Toast.makeText(EncyclopediaActivity.this, R.string.locked_item_msg, Toast.LENGTH_SHORT).show();
                     }

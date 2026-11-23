@@ -3,9 +3,6 @@
     <string name="organic">Organic</string>
     <string name="recycle">Recycle</string>
     <string name="hazardous">Hazardous</string>
-    <string name="organic_with_emoji">🟣  Organic</string>
-    <string name="recycle_with_emoji">♻️  Recycle</string>
-    <string name="hazardous_with_emoji">☣️  Hazardous</string>
     <string name="easy">🌱 Easy</string>
     <string name="medium">⚡ Medium</string>
     <string name="hard">🔥 Hard</string>

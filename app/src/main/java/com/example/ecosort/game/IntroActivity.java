@@ -8,18 +8,21 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class IntroActivity extends AppCompatActivity {
 
+    private BottomNavigationView bottomNav;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         loadLocale();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
 
-        BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
+        bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setSelectedItemId(R.id.nav_learn);
         bottomNav.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
             if (id == R.id.nav_home) {
-                startActivity(new Intent(this, MenuActivity.class));
+                // MenuActivity is already below us in the back stack — just go back to it
+                finish();
                 return true;
             } else if (id == R.id.nav_learn) {
                 return true;
@@ -29,6 +32,13 @@ public class IntroActivity extends AppCompatActivity {
             }
             return false;
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Re-highlight "Intro" when returning from the Library screen
+        bottomNav.getMenu().findItem(R.id.nav_learn).setChecked(true);
     }
 
     private void loadLocale() {
